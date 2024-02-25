@@ -11,24 +11,28 @@ export default {
     };
   },
   methods: {
-    getMovies() {
-      // Define the URLs for the requests
-      const movie = "https://api.themoviedb.org/3/search/movie?api_key=" + store.apiKey + "&query=" + this.inputSearch;
-      const tv = "https://api.themoviedb.org/3/search/tv?api_key=" + store.apiKey + "&query=" + this.inputSearch;
+    async getMovies() {
+      store.state = "loading";
 
-      // Make multiple requests using Promise.all
-      Promise.all([axios.get(movie), axios.get(tv)])
-        .then((response) => {
-          const responseMovie = response[0];
-          const responseTv = response[1];
-          // Handle the responses
-          store.movies = responseMovie.data.results.concat(responseTv.data.results);
-          store.search = this.inputSearch;
-        })
-        .catch((error) => {
-          // Handle any errors
-          console.log(error);
-        });
+      try {
+        // Define the URLs for the requests
+        const movie = "https://api.themoviedb.org/3/search/movie?api_key=" + store.apiKey + "&query=" + this.inputSearch;
+        const tv = "https://api.themoviedb.org/3/search/tv?api_key=" + store.apiKey + "&query=" + this.inputSearch;
+
+        // Make multiple requests using Promise.all
+        const [responseMovie, responseTv] = await Promise.all([axios.get(movie), axios.get(tv)]);
+
+        // Handle the responses
+        store.movies = responseMovie.data.results.concat(responseTv.data.results);
+        store.search = this.inputSearch;
+      } catch (error) {
+        // Handle any errors
+        console.log(error);
+        store.state = "error";
+      } finally {
+        // Show the results
+        store.movies.length === 0 ? (store.state = "noResult") : (store.state = "result");
+      }
     },
   },
 };
@@ -39,11 +43,12 @@ export default {
     <div class="container header-inner">
       <!-- Logo -->
       <div class="logo">Boolflix</div>
+
       <!-- Search -->
-      <div class="search">
+      <form @submit.prevent="getMovies" class="search">
         <input type="text" v-model="this.inputSearch" placeholder="Search films and series" />
-        <button @click="getMovies()">Search</button>
-      </div>
+        <button type="submit">Search</button>
+      </form>
     </div>
   </header>
 </template>
@@ -64,6 +69,10 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media (max-width: 576px) {
+    flex-direction: column;
+  }
 }
 
 .logo {
@@ -76,16 +85,29 @@ header {
 
 .search {
   display: flex;
+  width: 100%;
+  max-width: 37.5rem;
+  margin-left: 1.5rem;
+
+  @media (max-width: 576px) {
+    margin-top: 0.75rem;
+    margin-left: 0;
+  }
 }
 
 input {
-  border: 1px solid var(--extralight);
-  padding: 0.5rem;
+  border: 1px solid var(--lightmedium);
+  padding: 0.5rem 1rem;
   border-radius: 0.25rem;
   color: var(--extralight);
+  width: 100%;
 
   &::placeholder {
     color: var(--lightmedium);
+  }
+
+  &:focus {
+    border-color: var(--extralight);
   }
 }
 

@@ -17,10 +17,21 @@ export default {
 
 <template>
   <main class="container">
-    <h1>Hai cercato: {{ store.search }}</h1>
-    <ul>
-      <Card v-for="movie in store.movies" :key="movie.id" :movie="movie" />
-    </ul>
+    <!-- Welcome -->
+    <h1 v-if="store.state === 'welcome'">Welcome to Boolflix<br />Use the search bar to find your favorite movies</h1>
+    <!-- Loading -->
+    <h1 v-if="store.state === 'loading'">Loading...</h1>
+    <!-- Result -->
+    <div v-if="store.state === 'result'">
+      <h1>You searched: {{ store.search }}</h1>
+      <ul>
+        <Card v-for="movie in store.movies" :key="movie.id" :movie="movie" />
+      </ul>
+    </div>
+    <!-- No result -->
+    <h1 v-if="store.state === 'noResult'">Your search returned no results, try again</h1>
+    <!-- Error -->
+    <h1 v-if="store.state === 'error'">Sorry, is there an error with results</h1>
   </main>
 </template>
 
@@ -28,6 +39,10 @@ export default {
 main {
   margin-top: 7rem;
   flex-grow: 1;
+
+  @media (max-width: 576px) {
+    margin-top: 10rem;
+  }
 }
 
 ul {

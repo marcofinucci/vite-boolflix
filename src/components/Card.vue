@@ -13,30 +13,30 @@ export default {
 <template>
   <li>
     <div class="card">
-      <!-- Display poster -->
+      <!-- Poster -->
       <div class="poster">
         <img v-if="movie.poster_path" :src="'https://image.tmdb.org/t/p/w342/' + movie.poster_path" :alt="movie.title" />
-        <div v-else class="poster-not-found">Poster not found</div>
+        <div v-else class="poster-not-found">{{ movie.title ? movie.title : movie.name }}</div>
       </div>
 
       <!-- Content -->
       <div class="content">
-        <!-- Display title -->
+        <!-- Title -->
         <div class="title">
           <div><strong>Title:</strong> {{ movie.title ? movie.title : movie.name }}</div>
           <div><strong>Original Title:</strong> {{ movie.original_title ? movie.original_title : movie.original_name }}</div>
         </div>
 
-        <!-- Display original language -->
+        <!-- Original language -->
         <div class="language"><strong>Language:</strong> {{ movie.original_language }}</div>
 
-        <!-- Display vote -->
+        <!-- Stars -->
         <div class="stars">
           <i v-for="i in this.stars(movie.vote_average)" class="fa-solid fa-star"></i>
           <i v-for="i in 5 - this.stars(movie.vote_average)" class="fa-regular fa-star"></i>
         </div>
 
-        <!-- Display overview -->
+        <!-- Overview -->
         <div class="overview"><strong>Overview:</strong> {{ movie.overview }}</div>
       </div>
     </div>
@@ -50,6 +50,22 @@ li {
   padding-left: 1rem;
   padding-right: 1rem;
   position: relative;
+
+  @media (max-width: 1200px) {
+    width: calc(100% / 4);
+  }
+
+  @media (max-width: 992px) {
+    width: calc(100% / 3);
+  }
+
+  @media (max-width: 768px) {
+    width: calc(100% / 2);
+  }
+
+  @media (max-width: 576px) {
+    width: 100%;
+  }
 }
 
 .card {
@@ -87,7 +103,6 @@ li {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: var(--medium);
     text-transform: uppercase;
     text-align: center;
     font-weight: 700;
