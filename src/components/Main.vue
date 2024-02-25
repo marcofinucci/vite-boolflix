@@ -71,6 +71,7 @@ button {
   color: var(--extralight);
   margin: 4rem auto 0;
   display: table;
+
   &:hover {
     opacity: 0.9;
   }
