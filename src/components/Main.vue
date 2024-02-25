@@ -27,7 +27,7 @@ export default {
       <ul>
         <Card v-for="movie in store.movies" :key="movie.id" :movie="movie" />
       </ul>
-      <button>Load more</button>
+      <button v-if="store.loadMore" @click="store.loadmore">Load more</button>
     </div>
     <!-- No result -->
     <h1 v-if="store.state === 'noResult'">Your search returned no results, try again</h1>
