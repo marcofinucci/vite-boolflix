@@ -12,7 +12,7 @@
   --extralight: #ffffff;
 }
 
-/* Hard reset */
+/* Reset */
 
 * {
   margin: 0;
@@ -24,11 +24,11 @@
   outline: none;
   text-decoration: none;
   list-style: none;
-  color: var(--extralight);
   font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   line-height: 1.5;
 }
 
+body,
 h1,
 h2,
 h3,
@@ -61,10 +61,18 @@ img {
   max-width: 100%;
 }
 
+#app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 /* Utilities */
 
 .container {
   max-width: 1600px;
   margin: 0 auto;
   padding: 0 1rem;
+  width: 100%;
 }

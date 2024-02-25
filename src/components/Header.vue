@@ -7,7 +7,7 @@ export default {
   data() {
     return {
       store,
-      inputSearch: "Scrub",
+      inputSearch: "",
     };
   },
   methods: {
@@ -23,6 +23,7 @@ export default {
           const responseTv = response[1];
           // Handle the responses
           store.movies = responseMovie.data.results.concat(responseTv.data.results);
+          store.search = this.inputSearch;
         })
         .catch((error) => {
           // Handle any errors
@@ -40,7 +41,7 @@ export default {
       <div class="logo">Boolflix</div>
       <!-- Search -->
       <div class="search">
-        <input type="text" v-model="inputSearch" placeholder="Search films and series" />
+        <input type="text" v-model="this.inputSearch" placeholder="Search films and series" />
         <button @click="getMovies()">Search</button>
       </div>
     </div>
@@ -80,6 +81,8 @@ header {
 input {
   border: 1px solid var(--extralight);
   padding: 0.5rem;
+  border-radius: 0.25rem;
+  color: var(--extralight);
 
   &::placeholder {
     color: var(--lightmedium);
@@ -93,6 +96,8 @@ button {
   margin-left: 0.75rem;
   transition: opacity 0.3s ease;
   cursor: pointer;
+  border-radius: 0.25rem;
+  color: var(--extralight);
 
   &:hover {
     opacity: 0.9;

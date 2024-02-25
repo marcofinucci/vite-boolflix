@@ -17,6 +17,7 @@ export default {
 
 <template>
   <main class="container">
+    <h1>Hai cercato: {{ store.search }}</h1>
     <ul>
       <Card v-for="movie in store.movies" :key="movie.id" :movie="movie" />
     </ul>
@@ -25,7 +26,8 @@ export default {
 
 <style scoped>
 main {
-  margin-top: 5rem;
+  margin-top: 7rem;
+  flex-grow: 1;
 }
 
 ul {
@@ -33,5 +35,10 @@ ul {
   flex-wrap: wrap;
   margin-left: -1rem;
   margin-right: -1rem;
+}
+
+h1 {
+  color: var(--extralight);
+  font-size: 1.5rem;
 }
 </style>

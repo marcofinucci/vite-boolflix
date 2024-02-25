@@ -37,7 +37,7 @@ export default {
         </div>
 
         <!-- Display overview -->
-        <div class="overview">Overview: {{ movie.overview }}</div>
+        <div class="overview"><strong>Overview:</strong> {{ movie.overview }}</div>
       </div>
     </div>
   </li>
@@ -57,6 +57,12 @@ li {
   overflow: hidden;
   font-size: 0.875rem;
   background-color: var(--darkmedium);
+  border-radius: 0.25rem;
+  color: var(--extralight);
+
+  &:hover .poster {
+    opacity: 0;
+  }
 
   &:hover .content {
     opacity: 1;
@@ -67,6 +73,7 @@ li {
   aspect-ratio: 2 / 3;
   width: 100%;
   overflow: hidden;
+  transition: opacity 0.3s ease;
 
   img {
     width: 100%;
