@@ -8,15 +8,15 @@ export const store = reactive({
   inputSearch: "",
   state: "welcome",
   moviePage: 1,
-  moveTotalPage: 0,
   tvPage: 1,
+  moveTotalPage: 0,
   tvTotalPage: 0,
   loadMore: true,
   async getMovies() {
     store.state = "loading";
     store.moviePage = 1;
-    store.moveTotalPage = 0;
     store.tvPage = 1;
+    store.moveTotalPage = 0;
     store.tvTotalPage = 0;
     store.loadMore = true;
 
