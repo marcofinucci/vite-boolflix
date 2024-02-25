@@ -29,6 +29,9 @@ export default {
           console.log(error);
         });
     },
+    stars(vote) {
+      return Math.round(vote / 2);
+    },
   },
 };
 </script>
@@ -41,17 +44,23 @@ export default {
   <main>
     <ul>
       <li style="margin-top: 3rem" v-for="movie in this.movies" :key="movie.id">
+        <!-- Display poster -->
         <div>
           <img v-if="movie.poster_path" :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" :alt="movie.title" />
         </div>
+        <!-- Display title -->
         <div>Title: {{ movie.title ? movie.title : movie.name }}</div>
         <div>Original Title: {{ movie.original_title ? movie.original_title : movie.original_name }}</div>
+        <!-- Display original language -->
         <div>Language: {{ movie.original_language }}</div>
-        <div>Vote: {{ movie.vote_average }}</div>
+        <!-- Display vote -->
+        <div>Vote: {{ this.stars(movie.vote_average) }}</div>
+        <i v-for="i in this.stars(movie.vote_average)" class="fa-solid fa-star"></i>
+        <i v-for="i in 5 - this.stars(movie.vote_average)" class="fa-regular fa-star"></i>
       </li>
     </ul>
   </main>
-  <footer>footer</footer>
+  <footer style="margin-top: 3rem">footer</footer>
 </template>
 
 <style scoped></style>
