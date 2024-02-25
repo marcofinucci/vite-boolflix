@@ -1,15 +1,70 @@
+/* Variables */
+
+:root {
+  --primary: #c50914;
+  --yellow: #ffcc00;
+  --extradark: #000000;
+  --dark: #141414;
+  --darkmedium: #1b1b1b;
+  --medium: #535353;
+  --lightmedium: #888888;
+  --light: #f1f1f1;
+  --extralight: #ffffff;
+}
+
+/* Hard reset */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-size: 1rem;
-  font-weight: regular;
+  font-weight: 400;
   background: none;
   border: none;
   outline: none;
   text-decoration: none;
   list-style: none;
-  color: black;
+  color: var(--extralight);
   font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h5,
+a,
+p,
+input,
+button {
+  font-size: 1rem;
+}
+
+/* Global */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+  background: var(--dark);
+}
+
+strong {
+  font-weight: 700;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* Utilities */
+
+.container {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
