@@ -24,7 +24,7 @@ export const store = reactive({
       // Make multiple requests using Promise.all
       const [responseMovie, responseTv] = await Promise.all([axios.get(movie), axios.get(tv)]);
 
-      // set total page
+      // Set total page
       store.moveTotalPage = responseMovie.data.total_pages;
       store.tvTotalPage = responseTv.data.total_pages;
 

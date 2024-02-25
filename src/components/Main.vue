@@ -19,8 +19,10 @@ export default {
   <main class="container">
     <!-- Welcome -->
     <h1 v-if="store.state === 'welcome'">Welcome to Boolflix<br />Use the search bar to find your favorite movies</h1>
+
     <!-- Loading -->
     <h1 v-if="store.state === 'loading'">Loading...</h1>
+
     <!-- Result -->
     <div v-if="store.state === 'result'">
       <h1>You searched: {{ store.search }}</h1>
@@ -29,8 +31,10 @@ export default {
       </ul>
       <button v-if="store.loadMore" @click="store.loadmore">Load more</button>
     </div>
+
     <!-- No result -->
     <h1 v-if="store.state === 'noResult'">Your search returned no results, try again</h1>
+
     <!-- Error -->
     <h1 v-if="store.state === 'error'">Sorry, is there an error with results</h1>
   </main>
