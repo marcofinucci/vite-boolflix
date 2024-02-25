@@ -6,7 +6,7 @@ export default {
 
 <template>
   <footer>
-    <div class="container">Boolean Netflix - Copyright © 2024 - Marco Finucci</div>
+    <div class="container">Boolean Netflix - Marco Finucci</div>
   </footer>
 </template>
 

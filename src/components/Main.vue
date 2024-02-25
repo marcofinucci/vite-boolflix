@@ -27,6 +27,7 @@ export default {
       <ul>
         <Card v-for="movie in store.movies" :key="movie.id" :movie="movie" />
       </ul>
+      <button>Load more</button>
     </div>
     <!-- No result -->
     <h1 v-if="store.state === 'noResult'">Your search returned no results, try again</h1>
@@ -55,5 +56,19 @@ ul {
 h1 {
   color: var(--extralight);
   font-size: 1.5rem;
+}
+
+button {
+  background-color: var(--medium);
+  padding: 0.5rem 1rem;
+  transition: opacity 0.3s ease;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  color: var(--extralight);
+  margin: 4rem auto 0;
+  display: table;
+  &:hover {
+    opacity: 0.9;
+  }
 }
 </style>

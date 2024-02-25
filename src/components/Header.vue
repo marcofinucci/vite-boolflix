@@ -1,5 +1,4 @@
 <script>
-import axios from "axios";
 import { store } from "../store.js";
 
 export default {
@@ -7,36 +6,7 @@ export default {
   data() {
     return {
       store,
-      inputSearch: "",
     };
-  },
-  methods: {
-    async getMovies() {
-      store.state = "loading";
-
-      try {
-        // Define the URLs for the requests
-        const movie = "https://api.themoviedb.org/3/search/movie?api_key=" + store.apiKey + "&query=" + this.inputSearch;
-        const tv = "https://api.themoviedb.org/3/search/tv?api_key=" + store.apiKey + "&query=" + this.inputSearch;
-
-        // Make multiple requests using Promise.all
-        const [responseMovie, responseTv] = await Promise.all([axios.get(movie), axios.get(tv)]);
-
-        // Set movies in store
-        store.movies = responseMovie.data.results.concat(responseTv.data.results);
-        store.search = this.inputSearch;
-
-        // Reset input
-        this.inputSearch = "";
-      } catch (error) {
-        // Handle any errors
-        console.log(error);
-        store.state = "error";
-      } finally {
-        // Show the results
-        store.movies.length === 0 ? (store.state = "noResult") : (store.state = "result");
-      }
-    },
   },
 };
 </script>
@@ -48,8 +18,8 @@ export default {
       <div class="logo">Boolflix</div>
 
       <!-- Search -->
-      <form @submit.prevent="getMovies" class="search">
-        <input type="text" v-model="this.inputSearch" placeholder="Search films and series" />
+      <form @submit.prevent="store.getMovies" class="search">
+        <input type="text" v-model="store.inputSearch" placeholder="Search films and series" />
         <button type="submit">Search</button>
       </form>
     </div>
