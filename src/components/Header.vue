@@ -22,9 +22,12 @@ export default {
         // Make multiple requests using Promise.all
         const [responseMovie, responseTv] = await Promise.all([axios.get(movie), axios.get(tv)]);
 
-        // Handle the responses
+        // Set movies in store
         store.movies = responseMovie.data.results.concat(responseTv.data.results);
         store.search = this.inputSearch;
+
+        // Reset input
+        this.inputSearch = "";
       } catch (error) {
         // Handle any errors
         console.log(error);

@@ -1,10 +1,15 @@
 <script>
+import ISO6391 from "iso-639-1";
+
 export default {
   name: "Card",
   props: ["movie"],
   methods: {
     stars(vote) {
       return Math.round(vote / 2);
+    },
+    originalLanguage(lang) {
+      return ISO6391.getName(lang);
     },
   },
 };
@@ -22,13 +27,14 @@ export default {
       <!-- Content -->
       <div class="content">
         <!-- Title -->
-        <div class="title">
-          <div><strong>Title:</strong> {{ movie.title ? movie.title : movie.name }}</div>
-          <div><strong>Original Title:</strong> {{ movie.original_title ? movie.original_title : movie.original_name }}</div>
-        </div>
+        <div class="title"><strong>Title:</strong> {{ movie.title ? movie.title : movie.name }}</div>
+        <div class="original-title"><strong>Original Title:</strong> {{ movie.original_title ? movie.original_title : movie.original_name }}</div>
 
         <!-- Original language -->
-        <div class="language"><strong>Language:</strong> {{ movie.original_language }}</div>
+        <div v-if="originalLanguage(movie.original_language)" class="language">
+          <img :src="'https://www.unknown.nu/flags/images/' + movie.original_language + '-100'" :alt="originalLanguage(movie.original_language)" />
+          <div class="language-name"><strong>Language:</strong> {{ originalLanguage(movie.original_language) }}</div>
+        </div>
 
         <!-- Stars -->
         <div class="stars">
@@ -37,7 +43,7 @@ export default {
         </div>
 
         <!-- Overview -->
-        <div class="overview"><strong>Overview:</strong> {{ movie.overview }}</div>
+        <div v-if="movie.overview" class="overview"><strong>Overview:</strong> {{ movie.overview }}</div>
       </div>
     </div>
   </li>
@@ -51,11 +57,15 @@ li {
   padding-right: 1rem;
   position: relative;
 
-  @media (max-width: 1200px) {
+  @media (max-width: 2000px) {
+    width: calc(100% / 5);
+  }
+
+  @media (max-width: 1600px) {
     width: calc(100% / 4);
   }
 
-  @media (max-width: 992px) {
+  @media (max-width: 1200px) {
     width: calc(100% / 3);
   }
 
@@ -134,10 +144,24 @@ li {
   }
 }
 
-.language,
 .stars,
-.overview {
+.overview,
+.original-title {
   margin-top: 0.5rem;
+}
+
+.original-title {
+  margin-bottom: 1rem;
+}
+
+.language {
+  display: flex;
+  align-items: center;
+
+  img {
+    max-width: 1.5rem;
+    margin-right: 0.5rem;
+  }
 }
 
 .stars i {
