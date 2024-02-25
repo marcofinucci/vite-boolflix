@@ -14,6 +14,10 @@ export const store = reactive({
   loadMore: true,
   async getMovies() {
     store.state = "loading";
+    store.moviePage = 1;
+    store.moveTotalPage = 0;
+    store.tvPage = 1;
+    store.tvTotalPage = 0;
     store.loadMore = true;
 
     try {
